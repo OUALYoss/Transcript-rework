@@ -1,0 +1,47 @@
+{
+    "transcript_id": "t3_medecin",
+    "metadata": {
+      "duration": 74.6,
+      "date": "2024-10-01T09:20:00Z",
+      "source": "assemblyai"
+    },
+    "context": {
+      "domain": "prise_rdv_medical",
+      "entities": ["ordonnance", "antibiotique", "allergie", "ibuprofène", "amoxicilline"],
+      "participants": { "speaker_0": "Secrétariat", "speaker_1": "Patient" },
+      "safety": { "no_medical_advice": true }
+    },
+    "messages": [
+      {
+        "speaker": "speaker_1",
+        "content": "bonjour je voulais un rendez vous avec le docteur martin euh j'ai une douleur a l'oreille depuis trois jours",
+        "start_time": 0.0,
+        "end_time": 11.8
+      },
+      {
+        "speaker": "speaker_0",
+        "content": "bonjour vous avez de la fievre ou des vertiges",
+        "start_time": 12.0,
+        "end_time": 16.6
+      },
+      {
+        "speaker": "speaker_1",
+        "content": "pas de fièvre mais un peu de vertige et jai pris de libuprofene",
+        "start_time": 16.7,
+        "end_time": 24.7
+      },
+      {
+        "speaker": "speaker_0",
+        "content": "daccord vous etes allergique a un antibio type amoxici line",
+        "start_time": 24.8,
+        "end_time": 31.5
+      },
+      {
+        "speaker": "speaker_1",
+        "content": "non pas dalergie connue",
+        "start_time": 31.6,
+        "end_time": 34.2
+      }
+    ]
+  }
+  

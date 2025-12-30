@@ -1,0 +1,46 @@
+{
+    "transcript_id": "t1_recrutement",
+    "metadata": {
+      "duration": 78.4,
+      "date": "2024-12-18T10:15:00Z",
+      "source": "whisper-large-v3"
+    },
+    "context": {
+      "domain": "recrutement_tech",
+      "participants": { "speaker_0": "Recruteur", "speaker_1": "Candidat" },
+      "glossary": ["Django", "PostgreSQL", "Redis", "Kubernetes", "CI/CD", "GitHub Actions"]
+    },
+    "messages": [
+      {
+        "speaker": "speaker_0",
+        "content": "Bonjour monsieur donc euh merci d'avoir postulé chez nous aujourd'hui on va discuter un peu de votre de votre parcours",
+        "start_time": 0.0,
+        "end_time": 8.2
+      },
+      {
+        "speaker": "speaker_1",
+        "content": "Oui bonjour merci de me recevoir donc euh ben j'ai travaillé pendant 3 ans chez chez Techno Corp en tant que tant que développeur back-end",
+        "start_time": 8.3,
+        "end_time": 18.1
+      },
+      {
+        "speaker": "speaker_0",
+        "content": "D'accord et vous avez utilisé quelles quelles technologies principalement",
+        "start_time": 18.2,
+        "end_time": 22.0
+      },
+      {
+        "speaker": "speaker_1",
+        "content": "Alors principalement du python avec django et et aussi pas mal de postgre sql pour la base de données on a aussi fait du redis pour le catching",
+        "start_time": 22.1,
+        "end_time": 34.0
+      },
+      {
+        "speaker": "speaker_1",
+        "content": "et récemment j'ai commencé à à travailler sur des des projets avec avec des LMS pour pour automatiser certaines tâches",
+        "start_time": 34.1,
+        "end_time": 46.0
+      }
+    ]
+  }
+  

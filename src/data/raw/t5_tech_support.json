@@ -1,0 +1,47 @@
+{
+    "transcript_id": "t5_tech_support",
+    "metadata": {
+      "duration": 88.1,
+      "date": "2024-12-01T11:30:00Z",
+      "source": "deepgram"
+    },
+    "context": {
+      "domain": "support_tech",
+      "product": "Omogen Dashboard",
+      "participants": { "speaker_0": "Tech Support", "speaker_1": "Client" },
+      "glossary": ["API", "endpoint", "error 500", "maintenance"]
+    },
+    "messages": [
+      {
+        "speaker": "speaker_0",
+        "content": "bonjour je vois que vous avez un problème de connexion à l'api est-ce que vous avez vérifié les logs ?",
+        "start_time": 0.0,
+        "end_time": 8.2
+      },
+      {
+        "speaker": "speaker_1",
+        "content": "oui mais le problème c'est que l'endpoint renvoie error 500 depuis hier",
+        "start_time": 8.3,
+        "end_time": 16.5
+      },
+      {
+        "speaker": "speaker_0",
+        "content": "je vois donc je vais vérifier si il y a des maintenances programmées",
+        "start_time": 16.6,
+        "end_time": 22.3
+      },
+      {
+        "speaker": "speaker_1",
+        "content": "d'accord merci, mais je pense que c'est un problème de serveur",
+        "start_time": 22.4,
+        "end_time": 30.8
+      },
+      {
+        "speaker": "speaker_0",
+        "content": "je vais vérifier mais c'est peut-être une erreur de config de l'api",
+        "start_time": 30.9,
+        "end_time": 40.2
+      }
+    ]
+  }
+  

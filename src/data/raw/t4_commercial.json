@@ -1,0 +1,47 @@
+{
+    "transcript_id": "t4_commercial",
+    "metadata": {
+      "duration": 83.9,
+      "date": "2024-12-02T16:40:00Z",
+      "source": "deepgram"
+    },
+    "context": {
+      "domain": "vente_b2b",
+      "company": "Omogen",
+      "entities": ["POC", "contrat annuel", "RGPD", "SLA", "données sensibles"],
+      "participants": { "speaker_0": "Sales", "speaker_1": "Prospect" }
+    },
+    "messages": [
+      {
+        "speaker": "speaker_0",
+        "content": "bonjour merci pour votre temps je voulais revenir sur le poc et les contraintes rgpd",
+        "start_time": 0.0,
+        "end_time": 9.1
+      },
+      {
+        "speaker": "speaker_1",
+        "content": "oui alors nous on a surtout besoin dun sla clair et de savoir ou sont stockées les données sensibles",
+        "start_time": 9.2,
+        "end_time": 19.6
+      },
+      {
+        "speaker": "speaker_0",
+        "content": "bien sur on peut proposer un contrat annuel avec sla et un hébergement ue",
+        "start_time": 19.7,
+        "end_time": 28.2
+      },
+      {
+        "speaker": "speaker_1",
+        "content": "ok et le prix cest plutot par call par utilisateur ou au volume",
+        "start_time": 28.3,
+        "end_time": 35.2
+      },
+      {
+        "speaker": "speaker_0",
+        "content": "on est au volume d'appels et au module choisi mais je peux pas donner un chiffre sans votre volumetrie",
+        "start_time": 35.3,
+        "end_time": 47.4
+      }
+    ]
+  }
+  
