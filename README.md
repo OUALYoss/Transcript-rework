@@ -86,17 +86,37 @@ transcript-rework/
 ## Exemple avant/après
 
 **Avant :**
-```
-Bonjour monsieur donc euh merci d'avoir postulé chez nous
-Oui bonjour euh ben j'ai travaillé chez chez Techno Corp
-Principalement du python avec postgre sql et redis pour le catching
+```json
+"messages": [
+      {
+        "speaker": "speaker_0",
+        "content": "Bonjour monsieur donc euh merci d'avoir postulé chez nous aujourd'hui on va discuter un peu de votre de votre parcours",
+        "start_time": 0.0,
+        "end_time": 8.2
+      },
+      {
+        "speaker": "speaker_1",
+        "content": "Oui bonjour merci de me recevoir donc euh ben j'ai travaillé pendant 3 ans chez chez Techno Corp en tant que tant que développeur back-end",
+        "start_time": 8.3,
+        "end_time": 18.1
+      },
 ```
 
 **Après :**
-```
-Bonjour, Monsieur, merci d'avoir postulé chez nous.
-Oui, bonjour, j'ai travaillé chez Techno Corp.
-Principalement du Python avec PostgreSQL et Redis pour le caching.
+```json 
+"messages": [
+    {
+      "speaker": "speaker_0",
+      "content": "Bonjour, Monsieur, merci d'avoir postulé chez nous. Aujourd'hui, on va discuter un peu de votre parcours.",
+      "start_time": 0.0,
+      "end_time": 8.2
+    },
+    {
+      "speaker": "speaker_1",
+      "content": "Oui, bonjour, merci de me recevoir. J'ai travaillé pendant 3 ans chez Techno Corp en tant que développeur back-end.",
+      "start_time": 8.3,
+      "end_time": 18.1
+    }
 ```
 
 ## Traçabilité
