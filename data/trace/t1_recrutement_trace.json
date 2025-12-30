@@ -1,0 +1,79 @@
+{
+  "transcript_id": "t1_recrutement",
+  "timestamp": "2025-12-30T18:09:38.842521",
+  "total_changes": 12,
+  "changes": [
+    {
+      "step": "filler_removal",
+      "message_index": 0,
+      "before": "Bonjour monsieur donc euh merci d'avoir postulé chez nous aujourd'hui on va discuter un peu de votre de votre parcours",
+      "after": "Bonjour monsieur merci d'avoir postulé chez nous aujourd'hui on va discuter un peu de votre de votre parcours"
+    },
+    {
+      "step": "filler_removal",
+      "message_index": 1,
+      "before": "Oui bonjour merci de me recevoir donc euh ben j'ai travaillé pendant 3 ans chez chez Techno Corp en tant que tant que développeur back-end",
+      "after": "Oui bonjour merci de me recevoir j'ai travaillé pendant 3 ans chez chez Techno Corp en tant que tant que développeur back-end"
+    },
+    {
+      "step": "repetition_removal",
+      "message_index": 0,
+      "before": "Bonjour monsieur merci d'avoir postulé chez nous aujourd'hui on va discuter un peu de votre de votre parcours",
+      "after": "Bonjour monsieur merci d'avoir postulé chez nous aujourd'hui on va discuter un peu de votre parcours"
+    },
+    {
+      "step": "repetition_removal",
+      "message_index": 1,
+      "before": "Oui bonjour merci de me recevoir j'ai travaillé pendant 3 ans chez chez Techno Corp en tant que tant que développeur back-end",
+      "after": "Oui bonjour merci de me recevoir j'ai travaillé pendant 3 ans chez Techno Corp en tant que développeur back-end"
+    },
+    {
+      "step": "repetition_removal",
+      "message_index": 2,
+      "before": "D'accord et vous avez utilisé quelles quelles technologies principalement",
+      "after": "D'accord et vous avez utilisé quelles technologies principalement"
+    },
+    {
+      "step": "repetition_removal",
+      "message_index": 3,
+      "before": "Alors principalement du python avec django et et aussi pas mal de postgre sql pour la base de données on a aussi fait du redis pour le catching",
+      "after": "Alors principalement du python avec django et aussi pas mal de postgre sql pour la base de données on a aussi fait du redis pour le catching"
+    },
+    {
+      "step": "repetition_removal",
+      "message_index": 4,
+      "before": "et récemment j'ai commencé à à travailler sur des des projets avec avec des LMS pour pour automatiser certaines tâches",
+      "after": "et récemment j'ai commencé à travailler sur des projets avec des LMS pour automatiser certaines tâches"
+    },
+    {
+      "step": "llm_correction",
+      "message_index": 0,
+      "before": "Bonjour monsieur merci d'avoir postulé chez nous aujourd'hui on va discuter un peu de votre parcours",
+      "after": "Bonjour monsieur, merci d'avoir postulé chez nous. Aujourd'hui, on va discuter un peu de votre parcours."
+    },
+    {
+      "step": "llm_correction",
+      "message_index": 1,
+      "before": "Oui bonjour merci de me recevoir j'ai travaillé pendant 3 ans chez Techno Corp en tant que développeur back-end",
+      "after": "Oui, bonjour, merci de me recevoir. J'ai travaillé pendant 3 ans chez Techno Corp en tant que développeur back-end."
+    },
+    {
+      "step": "llm_correction",
+      "message_index": 2,
+      "before": "D'accord et vous avez utilisé quelles technologies principalement",
+      "after": "D'accord, et vous avez utilisé quelles technologies principalement ?"
+    },
+    {
+      "step": "llm_correction",
+      "message_index": 3,
+      "before": "Alors principalement du python avec django et aussi pas mal de postgre sql pour la base de données on a aussi fait du redis pour le catching",
+      "after": "Alors principalement du Python avec Django et aussi pas mal de PostgreSQL pour la base de données. On a aussi fait du Redis pour le caching."
+    },
+    {
+      "step": "llm_correction",
+      "message_index": 4,
+      "before": "et récemment j'ai commencé à travailler sur des projets avec des LMS pour automatiser certaines tâches",
+      "after": "et récemment, j'ai commencé à travailler sur des projets avec des LMS pour automatiser certaines tâches."
+    }
+  ]
+}

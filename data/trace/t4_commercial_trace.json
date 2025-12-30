@@ -1,0 +1,37 @@
+{
+  "transcript_id": "t4_commercial",
+  "timestamp": "2025-12-30T18:09:53.800558",
+  "total_changes": 5,
+  "changes": [
+    {
+      "step": "llm_correction",
+      "message_index": 0,
+      "before": "bonjour merci pour votre temps je voulais revenir sur le poc et les contraintes rgpd",
+      "after": "Bonjour, merci pour votre temps. Je voulais revenir sur le POC et les contraintes RGPD."
+    },
+    {
+      "step": "llm_correction",
+      "message_index": 1,
+      "before": "oui alors nous on a surtout besoin dun sla clair et de savoir ou sont stockées les données sensibles",
+      "after": "oui alors nous on a surtout besoin d'un SLA clair et de savoir où sont stockées les données sensibles"
+    },
+    {
+      "step": "llm_correction",
+      "message_index": 2,
+      "before": "bien sur on peut proposer un contrat annuel avec sla et un hébergement ue",
+      "after": "bien sûr on peut proposer un contrat annuel avec SLA et un hébergement UE"
+    },
+    {
+      "step": "llm_correction",
+      "message_index": 3,
+      "before": "ok et le prix cest plutot par call par utilisateur ou au volume",
+      "after": "Ok et le prix c'est plutôt par call par utilisateur ou au volume."
+    },
+    {
+      "step": "llm_correction",
+      "message_index": 4,
+      "before": "on est au volume d'appels et au module choisi mais je peux pas donner un chiffre sans votre volumetrie",
+      "after": "on est au volume d'appels et au module choisi mais je ne peux pas donner un chiffre sans votre volumétrie"
+    }
+  ]
+}

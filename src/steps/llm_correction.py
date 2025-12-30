@@ -1,6 +1,8 @@
 import os
 from openai import OpenAI
 from src.model.transcript import Transcript
+from src.model.trace import TransformationReport
+
 
 SYSTEM_MESSAGE = """You are a transcript correction assistant.
 Your role is to fix transcription errors while preserving the original meaning and structure.
@@ -40,10 +42,11 @@ Respond in French with ONLY the corrected text."""
     return response.choices[0].message.content.strip().strip('"')
 
 
-def llm_correct(transcript: Transcript) -> Transcript:
+def llm_correct(transcript: Transcript, report: TransformationReport) -> Transcript:
     glossary = transcript.context.glossary if transcript.context else []
 
-    for msg in transcript.messages:
+    for i, msg in enumerate(transcript.messages):
+        before = msg.content
         msg.content = correct_with_openai(msg.content, glossary)
-
+        report.add("llm_correction", i, before, msg.content)
     return transcript
