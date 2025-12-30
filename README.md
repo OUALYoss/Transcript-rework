@@ -4,25 +4,27 @@ Pipeline de correction automatique de transcripts téléphoniques pour Omogen.
 
 ## Le problème
 
-Les outils de transcription automatique (Whisper, Gladia, AssemblyAI...) génèrent des transcripts avec pas mal d'erreurs :
-
-- **Fillers** : "euh", "ben", "donc euh" qui polluent le texte
-- **Répétitions** : "chez chez", "de de" — typique du langage oral
-- **Termes techniques mal transcrits** : "postgre sql" au lieu de "PostgreSQL"
-- **Ponctuation absente ou incorrecte**
-- **Casse incorrecte** : "api" au lieu de "API"
-
-Ces erreurs rendent les transcripts difficiles à lire et à exploiter.
+Les outils de transcription automatique (Whisper, Gladia, AssemblyAI...) génèrent des transcripts avec pas mal d'erreurs : fillers ("euh", "ben"), répétitions ("chez chez"), termes techniques mal transcrits ("postgre sql" au lieu de "PostgreSQL"), ponctuation absente ou incorrecte. Ces erreurs rendent les transcripts difficiles à lire et à exploiter.
 
 ## La solution
 
-Un pipeline en 3 étapes qui nettoie les transcripts automatiquement :
+Un pipeline en 3 étapes qui nettoie les transcripts automatiquement, avec traçabilité complète et évaluation des corrections.
 
-```
-Input (raw) → Fillers → Répétitions → LLM → Output (clean)
-```
+## Architecture du pipeline
 
-Chaque étape est indépendante et tracée.
+![Pipeline Schema](docs/Mermaid Chart - Create complex, visualdiagrams with text.-2025-12-30-221529.png)
+
+Le pipeline suit un flux linéaire :
+
+**INPUT** → Les transcripts bruts au format JSON contiennent un identifiant, des métadonnées, un contexte métier (glossaire, participants) et la liste des messages avec leurs timestamps.
+
+**PIPELINE** → Trois étapes de correction s'enchaînent. D'abord, le Filler Removal supprime les mots parasites via regex. Ensuite, le Repetition Removal élimine les bégaiements. Enfin, le LLM Correction utilise GPT-4o-mini avec le glossaire du contexte pour corriger orthographe, ponctuation et termes techniques.
+
+**TRACE** → Chaque transformation est enregistrée avec l'état avant/après, permettant une traçabilité complète.
+
+**EVALUATION** → Trois métriques évaluent la qualité : WER (taux d'erreur), précision du glossaire, et un LLM Judge qui note la fidélité et la qualité.
+
+**OUTPUT** → Les transcripts corrigés, les rapports de trace et le résumé d'évaluation sont générés.
 
 ## Installation
 
@@ -32,9 +34,10 @@ cd Transcript-rework
 pip install -r requirements.txt
 ```
 
-Crée un fichier `.env` :
+Créez un fichier `.env` avec vos credentials :
+
 ```
-OPENAI_API_KEY=sk-ta-clé-ici
+OPENAI_API_KEY=sk-votre-clé-ici
 MODEL=gpt-4o-mini
 ```
 
@@ -44,54 +47,41 @@ MODEL=gpt-4o-mini
 python main.py
 ```
 
-Les transcripts dans `data/raw/` sont traités et sauvegardés dans `data/processed/`.
-Les rapports de traçabilité vont dans `data/reports/`.
+Les transcripts dans `data/raw/` sont traités. Les résultats vont dans `data/processed/`, les traces dans `data/trace/`.
 
-## Architecture
+## Structure du projet
 
 ```
 transcript-rework/
-├── main.py                     # Point d'entrée
+├── main.py                          # Point d'entrée
 ├── src/
 │   ├── model/
-│   │   ├── transcript.py       # Modèles Pydantic
-│   │   └── trace.py            # Traçabilité
+│   │   ├── transcript.py            # Modèles Pydantic
+│   │   └── trace.py                 # Traçabilité
 │   ├── ingestion/
-│   │   └── ingestion.py        # Chargement/sauvegarde JSON
-│   ├── pipeline.py             # Orchestrateur
-│   └── steps/
-│       ├── filler_removal.py   # Étape 1 : supprime "euh", "ben"...
-│       ├── repetition_removal.py # Étape 2 : "chez chez" → "chez"
-│       └── llm_correction.py   # Étape 3 : correction via GPT-4o-mini
-└── data/
-    ├── raw/                    # Transcripts bruts
-    ├── processed/              # Transcripts corrigés
-    └── reports/                # Rapports de traçabilité
+│   │   └── ingestion.py             # Chargement/sauvegarde JSON
+│   ├── pipeline.py                  # Orchestrateur
+│   ├── steps/
+│   │   ├── filler_removal.py        # Étape 1
+│   │   ├── repetition_removal.py    # Étape 2
+│   │   └── llm_correction.py        # Étape 3
+│   └── evaluation/
+│       └── metrique.py              # WER, Glossary, LLM Judge
+├── data/
+│   ├── raw/                         # Transcripts bruts
+│   ├── processed/                   # Transcripts corrigés
+│   └── trace/                       # Rapports
+└── docs/
+    └── pipeline_schema.png          # Schéma architecture
 ```
 
 ## Les 3 étapes du pipeline
 
-### 1. Suppression des fillers (regex)
+**Étape 1 - Filler Removal (regex)** : Supprime les mots parasites du langage oral comme "euh", "ben", "hein", "bah", "donc euh", "tu sais", "voilà", "je veux dire". Ces fillers n'apportent pas d'information et polluent la lecture.
 
-Supprime les mots parasites du langage oral :
-- "euh", "ben", "hein", "bah"
-- "donc euh", "et euh", "enfin"
-- "tu sais", "voilà", "je veux dire"
+**Étape 2 - Repetition Removal (regex)** : Supprime les bégaiements et répétitions. Les mots simples répétés ("de de" → "de") et les groupes répétés ("en tant que tant que" → "en tant que") sont corrigés.
 
-### 2. Suppression des répétitions (regex)
-
-Supprime les bégaiements et répétitions :
-- Mots simples : "de de" → "de"
-- Groupes : "en tant que tant que" → "en tant que"
-
-### 3. Correction LLM (OpenAI)
-
-Utilise GPT-4o-mini pour :
-- Corriger l'orthographe et la ponctuation
-- Appliquer la bonne casse aux termes techniques (via le glossaire)
-- **Sans reformuler ni inventer du contenu**
-
-Le contexte métier (glossaire, domaine) est passé au LLM pour des corrections plus précises.
+**Étape 3 - LLM Correction (OpenAI)** : Utilise GPT-4o-mini pour corriger l'orthographe, la ponctuation et appliquer la bonne casse aux termes techniques. Le glossaire du contexte est passé au LLM pour des corrections précises. Le prompt est strict : pas de reformulation, pas d'invention de contenu.
 
 ## Exemple avant/après
 
@@ -104,34 +94,67 @@ Principalement du python avec postgre sql et redis pour le catching
 
 **Après :**
 ```
-Bonjour monsieur, merci d'avoir postulé chez nous.
+Bonjour, Monsieur, merci d'avoir postulé chez nous.
 Oui, bonjour, j'ai travaillé chez Techno Corp.
 Principalement du Python avec PostgreSQL et Redis pour le caching.
 ```
 
 ## Traçabilité
 
-Chaque transformation est enregistrée dans un rapport JSON :
+Chaque transformation est enregistrée dans un rapport JSON détaillé :
 
 ```json
 {
   "transcript_id": "t1_recrutement",
   "timestamp": "2024-12-30T10:30:00",
-  "total_changes": 8,
+  "total_changes": 12,
   "changes": [
     {
       "step": "filler_removal",
       "message_index": 0,
       "before": "Bonjour monsieur donc euh merci...",
       "after": "Bonjour monsieur merci..."
+    },
+    {
+      "step": "repetition_removal",
+      "message_index": 1,
+      "before": "chez chez Techno Corp",
+      "after": "chez Techno Corp"
     }
   ]
 }
 ```
 
+## Métriques d'évaluation
+
+Le projet inclut trois métriques pour évaluer la qualité des corrections.
+
+**WER (Word Error Rate)** mesure la distance entre le texte original et corrigé au niveau des mots. Il utilise la distance de Levenshtein et permet de quantifier l'ampleur des modifications.
+
+**Glossary Precision** calcule le pourcentage de termes techniques du glossaire correctement présents dans le texte corrigé. Un score de 100% indique que tous les termes attendus sont bien formatés.
+
+**LLM Judge** utilise un LLM pour évaluer la qualité sur trois critères notés sur 10 : fidélité (le sens est-il préservé ?), qualité linguistique (orthographe, ponctuation), et termes techniques (sont-ils corrects ?).
+
+Exemple de résultats :
+```json
+{
+  "transcript_id": "t1_recrutement",
+  "wer": 0.32,
+  "glossary_precision": 1.0,
+  "llm_judge": {
+    "fidelity": 10,
+    "quality": 8,
+    "technical": 9,
+    "average": 9,
+    "comment": "Correction précise, sens préservé."
+  }
+}
+```
+
 ## Format des transcripts
 
-**Input :**
+Le format d'entrée attendu :
+
 ```json
 {
   "transcript_id": "t1_recrutement",
@@ -156,42 +179,38 @@ Chaque transformation est enregistrée dans un rapport JSON :
 }
 ```
 
-Le champ `context.glossary` permet au LLM de savoir quels termes techniques corriger.
-
-## Métriques d'évaluation possibles
-
-- **WER (Word Error Rate)** : comparaison avec transcription manuelle de référence
-- **Taux de correction** : % de messages modifiés
-- **Précision des termes techniques** : % de termes du glossaire correctement appliqués
-- **Conservation du sens** : évaluation humaine (pas d'invention)
+Le champ `context.glossary` est essentiel : il indique au LLM quels termes techniques doivent être correctement formatés.
 
 ## Challenges en production
 
-1. **Coût API** : chaque message = 1 appel OpenAI. Batching possible.
-2. **Latence** : ~500ms par message. Parallélisation envisageable.
-3. **Hallucinations LLM** : le prompt est strict mais risque non nul.
-4. **Contexte limité** : le LLM voit un message à la fois, pas la conversation entière.
-5. **Langues multiples** : actuellement optimisé pour le français.
+**Coût API** : Chaque message génère un appel OpenAI. Pour optimiser, un mode batch pourrait regrouper plusieurs messages par requête.
+
+**Latence** : Environ 500ms par message. Une parallélisation des appels permettrait de traiter les messages simultanément.
+
+**Hallucinations LLM** : Malgré un prompt strict, le risque que le LLM invente du contenu existe. La traçabilité permet de détecter ces cas.
+
+**Contexte limité** : Le LLM voit un message à la fois, pas la conversation entière. Pour des corrections plus cohérentes, passer plusieurs messages ensemble serait bénéfique.
+
+**Langues** : Actuellement optimisé pour le français. Un support multi-langues nécessiterait des adaptations du prompt et des regex.
 
 ## Cas limites
 
-- **Messages très courts** : "Oui", "D'accord" — peu de corrections possibles
-- **Jargon inconnu** : termes absents du glossaire mal corrigés
-- **Accents régionaux** : transcription source peut être mauvaise
-- **Chevauchements** : diarisation incorrecte non corrigée par ce pipeline
+Les messages très courts ("Oui", "D'accord") offrent peu de corrections possibles. Le jargon absent du glossaire risque d'être mal corrigé. Les accents régionaux peuvent produire des transcriptions source de mauvaise qualité que le pipeline ne peut pas rattraper. Les chevauchements de parole (diarisation incorrecte) ne sont pas corrigés par ce pipeline.
 
 ## Évolutions possibles
 
-- [ ] Correction de la diarisation via LLM
-- [ ] Détection d'omissions (phrases incomplètes)
-- [ ] Mode batch pour réduire les appels API
-- [ ] Support multi-langues
-- [ ] Interface web pour visualiser les corrections
-- [ ] Intégration Whisper pour pipeline complet audio → texte clean
+**Correction de diarisation via LLM** : Analyser le contexte pour réassigner les speakers mal identifiés.
+
+**Détection d'omissions** : Identifier les phrases incomplètes ou les coupures anormales.
+
+**Mode batch API** : Regrouper les messages pour réduire le nombre d'appels et les coûts.
+
+**ReAct Agent (v2)** : Une approche ReAct permettrait un pipeline plus intelligent avec détection dynamique des erreurs, correction itérative (corrige → vérifie → re-corrige), et réassignation des speakers basée sur le contexte. Trade-offs : plus précis sur cas complexes, mais coût API x3-5 et latence plus élevée.
+
+**Interface web** : Visualiser les corrections avec diff coloré avant/après.
+
+**Pipeline audio complet** : Intégrer Whisper pour un flux audio → texte clean de bout en bout.
 
 ## Stack technique
 
-- Python 3.12
-- Pydantic (validation)
-- OpenAI API (gpt-4o-mini)
-- python-dotenv
+Python 3.12, Pydantic pour la validation, OpenAI API (gpt-4o-mini), python-dotenv pour la configuration, regex pour les étapes heuristiques.
