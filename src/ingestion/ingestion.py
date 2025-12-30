@@ -1,14 +1,7 @@
 import json
+from pathlib import Path
+from src.model.transcript import Transcript
 import os
-
-
-def load_json(file_path):
-    if not os.path.exists(file_path):
-        return None
-
-    with open(file_path, "r", encoding="utf-8") as f:
-        data = json.load(f)
-        return data
 
 
 def normalize_data(data):
@@ -22,8 +15,23 @@ def normalize_data(data):
     return data
 
 
-if __name__ == "__main__":
-    file_path = "src/data/raw/t1_recrutement.json"
-    transcript_data = load_json(file_path)
-    # Normaliser les données
-    normalized_data = normalize_data(transcript_data)
+def load(path: str | Path) -> Transcript:
+    if not os.path.exists(path):
+        return None
+
+    with open(path, "r", encoding="utf-8") as f:
+        return Transcript(**json.load(f))
+
+
+def save(transcript: Transcript, path: str | Path) -> None:
+    """Sauvegarde un transcript."""
+
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
+
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(transcript.model_dump(), f, ensure_ascii=False, indent=2)
+
+
+def load_all(directory: str | Path) -> list[Transcript]:
+    """Charge tous les transcripts d'un dossier."""
+    return [load(f) for f in Path(directory).glob("*.json")]

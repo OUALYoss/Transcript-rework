@@ -1,7 +1,7 @@
 from pathlib import Path
 from dotenv import load_dotenv
 
-from src.ingestion.loader import load, save
+from src.ingestion.ingestion import load, save
 from src.pipeline import run
 from src.steps.filler_removal import remove_fillers
 from src.steps.repetition_removal import remove_repetitions
@@ -36,3 +36,4 @@ def process_all(
 
 if __name__ == "__main__":
     process_all()
+    print("done")
