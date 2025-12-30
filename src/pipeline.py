@@ -16,4 +16,3 @@ def run(
     for step in steps:
         result = step(result, report)
     return result, report
-

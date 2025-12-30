@@ -5,6 +5,7 @@ from datetime import datetime
 @dataclass
 class Change:
     """Une modification."""
+
     step: str
     message_index: int
     before: str
@@ -14,6 +15,7 @@ class Change:
 @dataclass
 class TransformationReport:
     """Rapport des transformations."""
+
     transcript_id: str
     timestamp: str = field(default_factory=lambda: datetime.now().isoformat())
     changes: list[Change] = field(default_factory=list)
@@ -25,7 +27,7 @@ class TransformationReport:
     def summary(self) -> dict:
         by_step = {}
         for c in self.changes:
-            by_step[c.step] = by_step.get(c.step, 0) + 1 # compteur de steps
+            by_step[c.step] = by_step.get(c.step, 0) + 1  # compteur de steps
         return {
             "transcript_id": self.transcript_id,
             "total_changes": len(self.changes),
