@@ -1,6 +1,6 @@
 {
   "transcript_id": "t5_tech_support",
-  "timestamp": "2025-12-30T18:10:00.685008",
+  "timestamp": "2025-12-30T22:25:10.904735",
   "total_changes": 5,
   "changes": [
     {
@@ -13,7 +13,7 @@
       "step": "llm_correction",
       "message_index": 1,
       "before": "oui mais le problème c'est que l'endpoint renvoie error 500 depuis hier",
-      "after": "oui mais le problème c'est que l'endpoint renvoie une erreur 500 depuis hier"
+      "after": "oui mais le problème c'est que l'endpoint renvoie l'error 500 depuis hier"
     },
     {
       "step": "llm_correction",
@@ -31,7 +31,7 @@
       "step": "llm_correction",
       "message_index": 4,
       "before": "je vais vérifier mais c'est peut-être une erreur de config de l'api",
-      "after": "Je vais vérifier, mais c'est peut-être une erreur de configuration de l'API."
+      "after": "Je vais vérifier mais c'est peut-être une erreur de config de l'API."
     }
   ]
 }

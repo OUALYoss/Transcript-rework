@@ -1,0 +1,62 @@
+[
+  {
+    "transcript_id": "t1_recrutement",
+    "wer": 0.3235294117647059,
+    "glossary_precision": 0.5,
+    "llm_judge": {
+      "fidelity": 10,
+      "quality": 8,
+      "technical": 9,
+      "average": 9,
+      "comment": "La correction est précise, mais il y a quelques petites erreurs de ponctuation."
+    }
+  },
+  {
+    "transcript_id": "t2_support_saas",
+    "wer": 0.313953488372093,
+    "glossary_precision": 1.0,
+    "llm_judge": {
+      "fidelity": 8,
+      "quality": 9,
+      "technical": 7,
+      "average": 8,
+      "comment": "Correction fidèle, bien orthographiée, mais des termes techniques nécessitent clarté."
+    }
+  },
+  {
+    "transcript_id": "t3_medecin",
+    "wer": 0.32727272727272727,
+    "glossary_precision": 1.0,
+    "llm_judge": {
+      "fidelity": 8,
+      "quality": 7,
+      "technical": 6,
+      "average": 7,
+      "comment": "La correction est globalement fidèle, mais certains termes techniques sont incorrects."
+    }
+  },
+  {
+    "transcript_id": "t4_commercial",
+    "wer": 0.1375,
+    "glossary_precision": 1.0,
+    "llm_judge": {
+      "fidelity": 9,
+      "quality": 8,
+      "technical": 9,
+      "average": 8.67,
+      "comment": "Correction de la syntaxe et de la ponctuation efficace, mais quelques erreurs subsistent."
+    }
+  },
+  {
+    "transcript_id": "t5_tech_support",
+    "wer": 0.1323529411764706,
+    "glossary_precision": 1.0,
+    "llm_judge": {
+      "fidelity": 8,
+      "quality": 7,
+      "technical": 8,
+      "average": 7.67,
+      "comment": "La correction est bonne mais quelques erreurs subsistent."
+    }
+  }
+]

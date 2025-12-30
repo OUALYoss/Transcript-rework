@@ -1,6 +1,6 @@
 {
   "transcript_id": "t4_commercial",
-  "timestamp": "2025-12-30T18:09:53.800558",
+  "timestamp": "2025-12-30T22:25:05.138695",
   "total_changes": 5,
   "changes": [
     {
@@ -31,7 +31,7 @@
       "step": "llm_correction",
       "message_index": 4,
       "before": "on est au volume d'appels et au module choisi mais je peux pas donner un chiffre sans votre volumetrie",
-      "after": "on est au volume d'appels et au module choisi mais je ne peux pas donner un chiffre sans votre volumétrie"
+      "after": "On est au volume d'appels et au module choisi, mais je peux pas donner un chiffre sans votre volumétrie."
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "transcript_id": "t3_medecin",
-  "timestamp": "2025-12-30T18:09:50.130185",
+  "timestamp": "2025-12-30T22:24:58.964800",
   "total_changes": 6,
   "changes": [
     {
@@ -25,13 +25,13 @@
       "step": "llm_correction",
       "message_index": 2,
       "before": "pas de fièvre mais un peu de vertige et jai pris de libuprofene",
-      "after": "pas de fièvre mais un peu de vertige et j'ai pris du ibuprofen"
+      "after": "pas de fièvre mais un peu de vertige et j'ai pris de l'ibuprofène"
     },
     {
       "step": "llm_correction",
       "message_index": 3,
       "before": "daccord vous etes allergique a un antibio type amoxici line",
-      "after": "D'accord, vous êtes allergique à un antibio type amoxicil line."
+      "after": "D'accord, vous êtes allergique à un antibio type amoxiciline."
     },
     {
       "step": "llm_correction",
