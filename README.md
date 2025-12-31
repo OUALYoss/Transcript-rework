@@ -11,8 +11,36 @@ Les outils de transcription automatique (Whisper, Gladia, AssemblyAI...) génèr
 Un pipeline en 3 étapes qui nettoie les transcripts automatiquement, avec traçabilité complète et évaluation des corrections.
 
 ## Architecture du pipeline
+```mermaid
+flowchart LR
+    subgraph INPUT
+        RAW[(data/raw/*.json)]
+    end
 
-![Pipeline Schema](docs/Mermaid Chart - Create complex, visualdiagrams with text.-2025-12-30-221529.png)
+    subgraph PIPELINE
+        S1["1. Filler Removal (regex)"]
+        S2["2. Repetition Removal (regex)"]
+        S3["3. LLM Correction (GPT-4o-mini)"]
+    end
+
+    subgraph OUTPUT
+        PROC[(data/processed/)]
+        TRACE[(data/trace/)]
+    end
+
+    subgraph EVAL
+        WER[WER]
+        GLOSS[Glossary Precision]
+        JUDGE[LLM Judge]
+    end
+
+    RAW --> S1 --> S2 --> S3 --> PROC
+    S1 -.-> TRACE
+    S2 -.-> TRACE
+    S3 -.-> TRACE
+    PROC --> WER & GLOSS & JUDGE
+```
+
 
 Le pipeline suit un flux linéaire :
 
