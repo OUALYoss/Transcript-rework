@@ -1,6 +1,6 @@
 {
   "transcript_id": "t4_commercial",
-  "timestamp": "2025-12-30T22:25:05.138695",
+  "timestamp": "2026-01-05T21:38:47.512741",
   "total_changes": 5,
   "changes": [
     {
@@ -19,7 +19,7 @@
       "step": "llm_correction",
       "message_index": 2,
       "before": "bien sur on peut proposer un contrat annuel avec sla et un hébergement ue",
-      "after": "bien sûr on peut proposer un contrat annuel avec SLA et un hébergement UE"
+      "after": "Bien sûr, on peut proposer un contrat annuel avec SLA et un hébergement UE."
     },
     {
       "step": "llm_correction",
@@ -31,7 +31,7 @@
       "step": "llm_correction",
       "message_index": 4,
       "before": "on est au volume d'appels et au module choisi mais je peux pas donner un chiffre sans votre volumetrie",
-      "after": "On est au volume d'appels et au module choisi, mais je peux pas donner un chiffre sans votre volumétrie."
+      "after": "On est au volume d'appels et au module choisi, mais je ne peux pas donner un chiffre sans votre volumétrie."
     }
   ]
 }

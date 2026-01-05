@@ -4,7 +4,7 @@ from datetime import datetime
 
 @dataclass
 class Change:
-    """Une modification."""
+    """Une modification"""
 
     step: str
     message_index: int
@@ -14,7 +14,7 @@ class Change:
 
 @dataclass
 class TransformationReport:
-    """Rapport des transformations."""
+    """Rapport des transformations"""
 
     transcript_id: str
     timestamp: str = field(default_factory=lambda: datetime.now().isoformat())

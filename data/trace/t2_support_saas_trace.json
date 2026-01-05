@@ -1,6 +1,6 @@
 {
   "transcript_id": "t2_support_saas",
-  "timestamp": "2025-12-30T22:24:51.551587",
+  "timestamp": "2026-01-05T21:38:30.605199",
   "total_changes": 6,
   "changes": [
     {
@@ -19,13 +19,13 @@
       "step": "llm_correction",
       "message_index": 1,
       "before": "bonjour je suis desolé vous dites que les calls ne remontent plus sur le tableau de bord c'est bien ça",
-      "after": "Bonjour, je suis désolé, vous dites que les calls ne remontent plus sur le tableau de bord, c'est bien ça ?"
+      "after": "Bonjour, je suis désolé. Vous dites que les calls ne remontent plus sur le tableau de bord, c'est bien ça ?"
     },
     {
       "step": "llm_correction",
       "message_index": 2,
       "before": "oui exactement et pourtant le webhook renvoie 200 mais dans votre ui ya rien",
-      "after": "Oui, exactement et pourtant le webhook renvoie 200, mais dans votre UI, il n'y a rien."
+      "after": "Oui, exactement, et pourtant le webhook renvoie 200, mais dans votre UI, il n'y a rien."
     },
     {
       "step": "llm_correction",
@@ -37,7 +37,7 @@
       "step": "llm_correction",
       "message_index": 4,
       "before": "api key non elle est bonne. et le sso on lutilise pas. on a juste un token statique",
-      "after": "API key non, elle est bonne. Et le SSO, on ne l'utilise pas. On a juste un token statique."
+      "after": "API key non, elle est bonne. Et le SSO, on l'utilise pas. On a juste un token statique."
     }
   ]
 }

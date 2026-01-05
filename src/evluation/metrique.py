@@ -4,7 +4,20 @@ from openai import OpenAI
 
 
 def wer(reference: str, hypothesis: str) -> float:
-    """Word Error Rate entre deux textes."""
+    """Calcule le Word Error Rate (WER) entre deux textes.
+    
+    Le WER mesure la distance de Levenshtein au niveau des mots,
+    normalisée par la longueur du texte de référence. Plus le score
+    est bas, plus les textes sont similaires.
+    
+    Args:
+        reference: Texte original (référence).
+        hypothesis: Texte corrigé (hypothèse à évaluer).
+    
+    Returns:
+        Score WER entre 0.0 (identique) et >1.0 (très différent).
+        Retourne 0.0 si la référence est vide.
+    """
     ref = reference.lower().split()
     hyp = hypothesis.lower().split()
 
@@ -27,7 +40,19 @@ def wer(reference: str, hypothesis: str) -> float:
 
 
 def glossary_precision(text: str, glossary: list[str]) -> float:
-    """% de termes du glossaire présents dans le texte."""
+    """Calcule le pourcentage de termes du glossaire présents dans le texte.
+    
+    Vérifie la présence exacte (case-sensitive) de chaque terme
+    du glossaire dans le texte corrigé.
+    
+    Args:
+        text: Texte dans lequel rechercher les termes.
+        glossary: Liste des termes techniques attendus.
+    
+    Returns:
+        Score entre 0.0 (aucun terme trouvé) et 1.0 (tous les termes présents).
+        Retourne 1.0 si le glossaire est vide.
+    """
     if not glossary:
         return 1.0
     found = sum(1 for term in glossary if term in text)
@@ -35,7 +60,29 @@ def glossary_precision(text: str, glossary: list[str]) -> float:
 
 
 def llm_judge(original: str, corrected: str) -> dict:
-    """LLM as"""
+    """LLM as judge 
+    Évalue la qualité d'une correction via un LLM (GPT-4o-mini).
+    
+    Utilise le paradigme "LLM as a Judge" pour noter la correction
+    sur trois critères : fidélité au sens original, qualité linguistique,
+    et précision des termes techniques.
+    
+    Args:
+        original: Texte avant correction.
+        corrected: Texte après correction.
+    
+    Returns:
+        Dictionnaire contenant les scores et commentaires :
+        {
+            "fidelity": int,    # Note /10 - sens préservé
+            "quality": int,     # Note /10 - orthographe, ponctuation
+            "technical": int,   # Note /10 - termes techniques
+            "average": float,   # Moyenne des trois notes
+            "comment": str      # Commentaire en français
+        }
+    
+    
+    """
     api_key = os.getenv("OPENAI_API_KEY")
     model = os.getenv("MODEL", "gpt-4o-mini")
     SYSTEM_MESSAGE = """You are a transcript correction evaluator.
@@ -68,7 +115,7 @@ Réponds en JSON: {{"fidelity": X, "quality": X, "technical": X, "average": X, "
     )
 
     content = response.choices[0].message.content.strip()
-    if content.startswith("```"):
+    if content.startswith("```"): # ``json
         content = content.split("\n", 1)[1].rsplit("```", 1)[0]
 
     return json.loads(content)

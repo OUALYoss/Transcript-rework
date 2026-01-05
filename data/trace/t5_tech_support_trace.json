@@ -1,6 +1,6 @@
 {
   "transcript_id": "t5_tech_support",
-  "timestamp": "2025-12-30T22:25:10.904735",
+  "timestamp": "2026-01-05T21:38:54.036930",
   "total_changes": 5,
   "changes": [
     {
@@ -13,7 +13,7 @@
       "step": "llm_correction",
       "message_index": 1,
       "before": "oui mais le problème c'est que l'endpoint renvoie error 500 depuis hier",
-      "after": "oui mais le problème c'est que l'endpoint renvoie l'error 500 depuis hier"
+      "after": "Oui, mais le problème, c'est que l'endpoint renvoie l'erreur 500 depuis hier."
     },
     {
       "step": "llm_correction",
